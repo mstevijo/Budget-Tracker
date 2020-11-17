@@ -1,8 +1,9 @@
 const FILES_TO_CACHE = [
-    '/index.html',
-    '/db.js',
-    
-    '/index.js',
+    "/",
+    "/index.html",
+    "/index.js",
+    "/db.js",
+    "/style.css"
 
 
 ];
@@ -19,11 +20,28 @@ self.addEventListener('install', function (evt) {
         caches.open(CACHE_NAME).then(cache => {
             console.log('Your files were pre-cached successfully!');
             return cache.addAll(FILES_TO_CACHE);
-        })
+        }).catch(err => {
+           console.log('some error', err)
+        })    
     );
     self.skipWaiting();
 });
-
+    // Activate Service Worker
+    self.addEventListener('activate', evt => {
+        evt.waitUntil(
+            caches.keys().then(keyList => {
+                return Promise.all(
+                    keyList.map( key => {
+                        if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
+                            console.log('Removing old cache data', key);
+                            return caches.delete(key);
+                        }
+                    })
+                );
+            })
+        );
+        self.clients.claim();
+    });
 
 
 self.addEventListener('fetch', function (evt) {
