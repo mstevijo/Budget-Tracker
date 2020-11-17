@@ -14,6 +14,8 @@ When brought back online:
 
   * Offline entries should be added to tracker.
 
+  ![screenshot](https://user-images.githubusercontent.com/65369173/99339938-e0862000-283b-11eb-90fb-3179daeb320d.png)
+
 ## User Story
 AS AN avid traveller
 I WANT to be able to track my withdrawals and deposits with or without a data/internet connection
