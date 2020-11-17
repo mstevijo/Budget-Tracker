@@ -29,7 +29,7 @@ function saveRecord(record) {
   const store = transaction.objectStore("pending");
 
   // add record to your store with add method.
-  store.add(record);
+
 }
 
 function checkDatabase() {
